@@ -1,0 +1,195 @@
+﻿<Window x:Class="TSP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lib="clr-namespace:TSP"
+        Title="Задача коммивояжера" Height="745.268" Width="1376.973" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <ScrollViewer HorizontalContentAlignment="Stretch" HorizontalScrollBarVisibility="Auto" >
+
+        <Grid x:Name="g" Height="715" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+                <RowDefinition Height="470"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="34" Width="426" Orientation="Horizontal" Margin="22,8,0,0" >
+                <Label Content="Число городов" FontSize="16" />
+                <Separator Width="22" Background="{x:Null}" />
+                <TextBox x:Name="textB_countCities" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="44" UndoLimit="3" FontSize="16"/>
+                <Separator Width="22" Background="{x:Null}" />
+                <Button Click="DrawPoints" Content="Построить" Height="27" HorizontalAlignment="Left" Name="button_random" VerticalAlignment="Top" Width="87" FontSize="14" />
+            </StackPanel>
+            <WrapPanel Grid.Row="1" Grid.Column="0" Background="LightBlue"  Width="1334" UseLayoutRounding="False" >
+                <Separator Width="1350" Height="10" Background="{x:Null}" />
+                <Separator Width="22" Background="{x:Null}" />
+                <Label Content="Полный перебор" Height="40" Width="262" FontSize="16" />
+                <Label Content="Муравьиный алгоритм" Height="40" Width="262" FontSize="16"/>
+                <Label Content="Генетический  алгоритм" Height="40" Width="262" FontSize="16" />
+                <Label Content="Метод имитации и отжига" Height="40" Width="262" FontSize="16" />
+                <Label Content="Метод ветвей и границ" Height="40" Width="262" FontSize="16" />
+                <Separator Width="22" Background="{x:Null}" />
+
+                <Grid  x:Name="graph1" Height="240" Width="240" Background="#FFC8E8C4" />
+                <Separator Width="22" Background="{x:Null}" />
+                <Grid  x:Name="graph2"  Height="240" Width="240" Background="#FFC8E8C4" >
+                </Grid>
+                <Separator Width="22" Background="{x:Null}" />
+                <Grid  x:Name="graph3"  Height="240" Width="240" Background="#FFC8E8C4" >
+                </Grid>
+                <Separator Width="22" Background="{x:Null}" />
+                <Grid  x:Name="graph4"  Height="240" Width="240" Background="#FFC8E8C4" >
+                </Grid>
+                <Separator Width="22" Background="{x:Null}" />
+                <Grid  x:Name="graph5"  Height="240" Width="240" Background="#FFC8E8C4" >
+                </Grid>
+
+                <Separator Width="22" Background="{x:Null}" />
+                <Separator Width="1350" Height="5" Background="{x:Null}" />
+                <Separator Width="22" Background="{x:Null}" />
+                <StackPanel Height="160" VerticalAlignment="Top" Width="165">
+                    <Label Content="= варианты маршрутов" Height="27" FlowDirection="RightToLeft" />
+                </StackPanel>
+                <StackPanel  HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Width="75">
+                    <TextBox x:Name="textB_maxTour" Height="27" TextWrapping="Wrap" Text="1000"/>
+                </StackPanel>
+                <Separator Width="22" Background="{x:Null}" />
+                <StackPanel Height="160" VerticalAlignment="Top" Width="165">
+                    <Label Content="= α" Height="27" FlowDirection="RightToLeft" />
+                    <Label Content="= β  " Height="27" FlowDirection="RightToLeft" />
+                    <Label Content="= rho " Height="27" FlowDirection="RightToLeft" />
+                    <Label Content="= Q  " Height="27" FlowDirection="RightToLeft" />
+                    <Label Content="= число муравьев" Height="27" FlowDirection="RightToLeft" />
+                    <Label Content="= время" Height="27" FlowDirection="RightToLeft" />
+                </StackPanel>
+                <StackPanel  HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Width="75">
+                    <TextBox x:Name="textB_alpha" Height="27" TextWrapping="Wrap" Text="3"/>
+                    <TextBox x:Name="textB_beta" Height="27" TextWrapping="Wrap" Text="2"/>
+                    <TextBox x:Name="textB_rho" Height="27" TextWrapping="Wrap" Text="0,01"/>
+                    <TextBox x:Name="textB_Q" Height="27" TextWrapping="Wrap" Text="2,0"/>
+                    <TextBox x:Name="textB_nAnts" Height="27" TextWrapping="Wrap" Text="4"/>
+                    <TextBox x:Name="textB_time" Height="27" TextWrapping="Wrap" Text="1000"/>
+                </StackPanel>
+                <Separator Width="22" Background="{x:Null}" />
+                <StackPanel Height="160" VerticalAlignment="Top" Width="165">
+                    <Label Content="= число популяции" Height="27" FlowDirection="RightToLeft" />
+                    <Label Content="= время" Height="27" FlowDirection="RightToLeft" />
+                </StackPanel>
+                <StackPanel  HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Width="75">
+                    <TextBox x:Name="textB_numPopulate" Height="27" TextWrapping="Wrap" Text="114"/>
+                    <TextBox x:Name="textB_timeGA" Height="27" TextWrapping="Wrap" Text="1000"/>
+                </StackPanel>
+                <Separator Width="22" Background="{x:Null}" />
+                <StackPanel Height="160" VerticalAlignment="Top" Width="165">
+                    <Label Content="= температура" Height="27" FlowDirection="RightToLeft" />
+                    <Label Content="= абсолютная температура" Height="27" FlowDirection="RightToLeft" />
+                    <Label Content="= скорость охлаждения" Height="27" FlowDirection="RightToLeft" />
+                </StackPanel>
+                <StackPanel  HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Width="75">
+                    <TextBox x:Name="textB_temperature" Height="27" TextWrapping="Wrap" Text="10000"/>
+                    <TextBox x:Name="textB_absoluteTemperature" Height="27" TextWrapping="Wrap" Text="0,00001"/>
+                    <TextBox x:Name="textB_coolingRate" Height="27" TextWrapping="Wrap" Text="0,9999"/>
+                </StackPanel>
+                <Separator Width="22" Background="{x:Null}" />
+                <StackPanel Height="160" VerticalAlignment="Top" Width="165">
+                    <Label Content="= (время (мс" Height="27" FlowDirection="RightToLeft" />
+                </StackPanel>
+                <StackPanel  HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Width="75">
+                    <TextBox x:Name="textB_timeBB" Height="27" TextWrapping="Wrap" Text="5"/>
+                </StackPanel>
+                <Separator Width="22" Background="{x:Null}" />
+                <Separator Width="22" Height="2" Background="{x:Null}" />
+            </WrapPanel>
+            <StackPanel Grid.Row="2" Grid.Column="0"  Width="1334" Orientation="Horizontal" VerticalAlignment="Top" Height="40" Margin="9,6,9,0">
+                <Separator Width="87" Background="{x:Null}" />
+                <Button x:Name="button_CalcBF" Content="Расчет" Height="31" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="110" IsEnabled="False" FontSize="16" FontFamily="Tunga" Margin="0,0,0,9" Click="button_CalcBF_Click" />
+                <Separator Width="152" Background="{x:Null}" />
+                <Button x:Name="button_CalcAC" Content="Расчет" Height="31" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" IsEnabled="False" FontSize="16" FontFamily="Tunga" Click="button_CalcAC_Click" />
+                <Separator Width="152" Background="{x:Null}" />
+                <Button x:Name="button_CalcGA" Content="Расчет" Height="31" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" IsEnabled="False" FontSize="16" FontFamily="Tunga" Click="button_CalcGA_Click" />
+                <Separator Width="152" Background="{x:Null}" />
+                <Button x:Name="button_CalcSA" Content="Расчет" Height="31" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" IsEnabled="False" FontSize="16" FontFamily="Tunga" Click="button_CalcSA_Click" />
+                <Separator Width="152" Background="{x:Null}" />
+                <Button x:Name="button_CalcBB" Content="Расчет" Height="31" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" IsEnabled="False" FontSize="16" FontFamily="Tunga" Click="button_CalcBB_Click" />
+            </StackPanel>
+
+            <WrapPanel Grid.Row="4" Grid.Column="0"  Width="1334" UseLayoutRounding="False" VerticalAlignment="Top" Height="70">
+                <Separator Width="22" Background="{x:Null}" />
+                <StackPanel Height="71" VerticalAlignment="Top" Width="165" >
+                    <Label Content=" Длина маршрута = " Height="27" HorizontalContentAlignment="Right"  />
+                    <Label Content=" Время работы = " Height="27" HorizontalContentAlignment="Right"  />
+                </StackPanel>
+                <StackPanel Height="71" VerticalAlignment="Top" Width="75">
+                    <Label x:Name="lengthBF" Height="27" />
+                    <Label x:Name="timeBF" Height="27" />
+                </StackPanel>
+                <Separator Width="22" Background="{x:Null}" />
+                <StackPanel Height="71" VerticalAlignment="Top" Width="165">
+                    <Label Content=" Длина маршрута = " Height="27" HorizontalContentAlignment="Right"  />
+                    <Label Content=" Время работы = " Height="27" HorizontalContentAlignment="Right"  />
+                </StackPanel>
+                <StackPanel Height="71" VerticalAlignment="Top" Width="75">
+                    <Label x:Name="lengthAC"  Height="27"   />
+                    <Label x:Name="timeAC"  Height="27"  />
+                </StackPanel>
+                <Separator Width="22" Background="{x:Null}" />
+                <StackPanel Height="71" VerticalAlignment="Top" Width="165">
+                    <Label Content=" Длина маршрута = " Height="27" HorizontalContentAlignment="Right"  />
+                    <Label Content=" Время работы = " Height="27" HorizontalContentAlignment="Right"  />
+                </StackPanel>
+                <StackPanel Height="71" VerticalAlignment="Top" Width="75">
+                    <Label x:Name="lengthGA"  Height="27"  />
+                    <Label x:Name="timeGA" Height="27" />
+                </StackPanel>
+                <Separator Width="22" Background="{x:Null}" />
+                <StackPanel Height="71" VerticalAlignment="Top" Width="165">
+                    <Label Content=" Длина маршрута = " Height="27" HorizontalContentAlignment="Right"  />
+                    <Label Content=" Время работы = " Height="27" HorizontalContentAlignment="Right"  />
+                </StackPanel>
+                <StackPanel Height="71" VerticalAlignment="Top" Width="75">
+                    <Label x:Name="lengthSA" Height="27" />
+                    <Label x:Name="timeSA" Height="27" />
+                </StackPanel>
+                <Separator Width="22" Background="{x:Null}" />
+                <StackPanel Height="71" VerticalAlignment="Top" Width="165">
+                    <Label Content=" Длина маршрута = " Height="27" HorizontalContentAlignment="Right"  />
+                    <Label Content=" Время работы = " Height="27" HorizontalContentAlignment="Right"  />
+                </StackPanel>
+                <StackPanel Height="160" VerticalAlignment="Top" Width="75">
+                    <Label x:Name="lengthBB" Height="27"  />
+                    <Label x:Name="timeBB" Height="27"/>
+                </StackPanel>
+            </WrapPanel>
+
+            <WrapPanel Grid.Row="4" Grid.Column="0"  Width="1334" UseLayoutRounding="False" VerticalAlignment="Top" Height="70">
+                <Separator Width="22" Background="{x:Null}" />
+                <Rectangle HorizontalAlignment="Left" Height="59" Stroke="#FFC8E8C4" VerticalAlignment="Top" Width="240" MinWidth="9" StrokeStartLineCap="Square" StrokeThickness="5"/>
+                <Separator Width="22" Background="{x:Null}" />
+                <Rectangle HorizontalAlignment="Left" Height="59" Stroke="#FFC8E8C4" VerticalAlignment="Top" Width="240" MinWidth="9" StrokeStartLineCap="Square" StrokeThickness="5"/>
+                <Separator Width="22" Background="{x:Null}" />
+                <Rectangle HorizontalAlignment="Left" Height="59" Stroke="#FFC8E8C4" VerticalAlignment="Top" Width="240" MinWidth="9" StrokeStartLineCap="Square" StrokeThickness="5"/>
+                <Separator Width="22" Background="{x:Null}" />
+                <Rectangle HorizontalAlignment="Left" Height="59" Stroke="#FFC8E8C4" VerticalAlignment="Top" Width="240" MinWidth="9" StrokeStartLineCap="Square" StrokeThickness="5"/>
+                <Separator Width="22" Background="{x:Null}" />
+                <Rectangle HorizontalAlignment="Left" Height="59" Stroke="#FFC8E8C4" VerticalAlignment="Top" Width="240" MinWidth="9" StrokeStartLineCap="Square" StrokeThickness="5"/>
+            </WrapPanel>
+            <WrapPanel Grid.Row="3" Grid.Column="0"  Width="1334" UseLayoutRounding="False" VerticalAlignment="Top" Height="20">
+                <Separator Width="22" Background="{x:Null}" />
+                <ProgressBar x:Name="progressBF" Height="20" Width="240" Background="White" IsIndeterminate="True" Visibility="Hidden" BorderThickness="0" Foreground="#FF9CDCB6"/>
+                <Separator Width="22" Background="{x:Null}" />
+                <ProgressBar x:Name="progressAC" Height="20" Width="240" Background="White" IsIndeterminate="True" Visibility="Hidden" BorderThickness="0" Foreground="#FF9CDCB6"/>
+                <Separator Width="22" Background="{x:Null}" />
+                <ProgressBar x:Name="progressGA" Height="20" Width="240" Background="White" IsIndeterminate="True" Visibility="Hidden" BorderThickness="0" Foreground="#FF9CDCB6"/>
+                <Separator Width="22" Background="{x:Null}" />
+                <ProgressBar x:Name="progressSA" Height="20" Width="240" Background="White" IsIndeterminate="True" Visibility="Hidden" BorderThickness="0" Foreground="#FF9CDCB6"/>
+                <Separator Width="22" Background="{x:Null}" />
+                <ProgressBar x:Name="progressBB" Height="20" Width="240" Background="White" IsIndeterminate="True" Visibility="Hidden" BorderThickness="0" Foreground="#FF9CDCB6"/>
+            </WrapPanel>
+            <Button Grid.Row="5" Grid.Column="0"  x:Name="button_save" Click="save_click" Content="Рассчитать и сохранить" Height="31" HorizontalAlignment="Center" VerticalAlignment="Top" Width="183" IsEnabled="False" FontSize="16" FontFamily="Tunga" HorizontalContentAlignment="Center" Margin="577,0,592,0" />
+        </Grid>
+    </ScrollViewer>
+</Window>
